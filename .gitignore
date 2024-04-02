@@ -29,4 +29,4 @@ bin
 .idea/
 .vscode/
 *.iml
-go-gemini
+go-gemini-cli

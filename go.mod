@@ -1,4 +1,4 @@
-module go-gemini
+module github.com/thiagosousasantana/go-gemini-cli
 
 go 1.22.0
 
