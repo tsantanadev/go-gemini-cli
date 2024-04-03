@@ -23,7 +23,10 @@ var (
 var askCmd = &cobra.Command{
 	Use:   "ask",
 	Short: "Ask a question to Gemini",
-	Long:  ``,
+	Long: `The ask command allows you to ask a question to Gemini, a generative AI model. 
+	You can provide a query using the --query flag and receive a response from the model. 
+	If you want the response to be streamed to the console, you can use the --stream flag. 
+	Please make sure to configure your API Key before using this command by running 'go-gemini-cli config'.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		ctx := cmd.Context()
 

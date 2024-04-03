@@ -15,17 +15,9 @@ var cfgFile string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "go-gemini",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	// Run: func(cmd *cobra.Command, args []string) { },
+	Use:   "go-gemini-cli",
+	Short: "A CLI tool for interacting with the OpenAI Gemini API.",
+	Long:  `go-gemini-cli is a command-line interface tool for interacting with the OpenAI Gemini API. It provides a convenient way to access and utilize the powerful capabilities of the Gemini API, allowing you to generate natural language text, answer questions, create conversational agents, and much more.`,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
