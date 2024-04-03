@@ -2,7 +2,6 @@ builds:
   - binary: go-gemini-cli
     goos:
       - linux
-      - windows
       - darwin
     goarch:
       - amd64
