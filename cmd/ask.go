@@ -10,11 +10,13 @@ import (
 	"github.com/google/generative-ai-go/genai"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+	"google.golang.org/api/iterator"
 	"google.golang.org/api/option"
 )
 
 var (
-	query string
+	query        string
+	shouldStream bool
 )
 
 // askCmd represents the ask command
@@ -38,13 +40,35 @@ var askCmd = &cobra.Command{
 		defer client.Close()
 
 		model := client.GenerativeModel("gemini-pro")
-		resp, err := model.GenerateContent(ctx, genai.Text(query))
-		if err != nil {
-			fmt.Print("Error generating content: ", err)
-			os.Exit(1)
-		}
+		if shouldStream {
+			iter := model.GenerateContentStream(ctx, genai.Text(query))
+			for {
+				resp, err := iter.Next()
+				if err == iterator.Done {
+					break
+				}
+				if err != nil {
+					fmt.Print("Error getting response: ", err)
+					break
+				}
 
-		fmt.Println(resp.Candidates[0].Content)
+				for _, part := range resp.Candidates[0].Content.Parts {
+					fmt.Println(part)
+				}
+			}
+			return
+		} else {
+			resp, err := model.GenerateContent(ctx, genai.Text(query))
+			if err != nil {
+				fmt.Print("Error getting response: ", err)
+				os.Exit(1)
+			}
+
+			for _, part := range resp.Candidates[0].Content.Parts {
+				fmt.Println(part)
+			}
+
+		}
 	},
 }
 
@@ -52,4 +76,5 @@ func init() {
 	rootCmd.AddCommand(askCmd)
 
 	askCmd.Flags().StringVarP(&query, "query", "q", "", "The query to ask Gemini")
+	askCmd.Flags().BoolVarP(&shouldStream, "stream", "s", false, "The response will be streamed to the console")
 }
