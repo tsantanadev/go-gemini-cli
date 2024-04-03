@@ -36,6 +36,8 @@ go-gemini-cli ask --query "Your question goes here?"
 
 Replace `"Your question goes here?"` with your actual question.
 
+![Gif showing a use case of ask command](assets/ask.gif)
+
 ### Exec
 
 The `exec` command allows you to execute a shell command and get the output. If an error occurs, it will be analyzed by the Gemini AI.
@@ -45,6 +47,8 @@ go-gemini-cli exec "Your shell command goes here"
 ```
 
 Replace `"Your shell command goes here"` with your actual shell command`
+
+![Gif showing a use case of exec command](assets/exec.gif)
 
 ## Contributing
 
